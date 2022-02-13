@@ -6,6 +6,7 @@ struct Word {
 	std::string word;
 	int total = 0;
 	int* pageNumbers = new int[100 + 1];
+	int frequency = 0;
 };
 
 int main() {
@@ -60,11 +61,12 @@ int main() {
 				store_max:
 				if(i < alreadyStored) {
 					if(array[i].word == tempWord) {
-						if(array[i].total >= 100) {
+						if(array[i].frequency >= 100) {
 							array[i].total++;
 						} else if(array[i].pageNumbers[array[i].total - 1] != j) {
 							array[i].pageNumbers[array[i].total++] = j;
 						}
+						array[i].frequency++;
 						flag = true;
 						goto end_store_max;
 					}
@@ -126,7 +128,7 @@ int main() {
 	int wordIterator = 0;
 	printing:
 	if(wordIterator < alreadyStored) {
-		if(array[wordIterator].total < 100 && array[wordIterator].word != "" && array[wordIterator].word != " ") {
+		if(array[wordIterator].frequency < 100 && array[wordIterator].word != "" && array[wordIterator].word != " ") {
 			std::cout << array[wordIterator].word << " - ";
 			int tempCounter = 0;
 			printWordPages:
